@@ -10,18 +10,20 @@ import java.io.IOException;
 @RestController
 public class EmailController {
 
-//    @Autowired
-   private final EmailService emailservice;
+   private final MailService mailService;
 
-    public EmailController(EmailService emailservice) {
-        this.emailservice = emailservice;
+    public EmailController( MailService mailService) {
+        this.mailService = mailService;
     }
+
 
     @RequestMapping(method = RequestMethod.POST ,value = "/sendemail")
     public ResponseEntity<ResponseWrapper> sendEmail(@RequestBody UserData userData) throws MessagingException, IOException {
         ResponseWrapper response = new ResponseWrapper();
-//UserData  userData = new UserData();
-        emailservice.sendmail(userData);
+        EmailAlert emailAlert = new EmailAlert();
+        emailAlert =mailService.constructEmailObj(userData);
+        mailService.sendEmail(emailAlert);
+
 
         response.setData("Email Sent successfully");
         response.setCode(200);
