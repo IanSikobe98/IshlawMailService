@@ -94,7 +94,7 @@ public class MailServiceImpl implements MailService {
     private MimeMessagePreparator getMessagePreparator(final EmailAlert tokenObject) throws UnsupportedEncodingException {
 
         MimeMessagePreparator preparator = (MimeMessage mimeMessage) -> {
-            mimeMessage.setFrom(new InternetAddress(environment.getRequiredProperty("spring.mail.username"),"ApwokaIan@gmail.com"));
+            mimeMessage.setFrom(new InternetAddress(environment.getRequiredProperty("spring.mail.username"),environment.getRequiredProperty("ishlaw.email.source")));
             mimeMessage.setRecipient(Message.RecipientType.TO, new InternetAddress(tokenObject.getEmailAddress()));
             mimeMessage.setHeader("", tokenObject.getEmailHeader());
             mimeMessage.setText(""+tokenObject.getAlertMessage()+"","US-ASCII","html");

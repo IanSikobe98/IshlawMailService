@@ -18,7 +18,7 @@ public class EmailController {
 
 
     @RequestMapping(method = RequestMethod.POST ,value = "/sendemail")
-    public ResponseEntity<ResponseWrapper> sendEmail(@RequestBody UserData userData) throws MessagingException, IOException {
+    public ResponseEntity<ResponseWrapper> sendEmail(@RequestBody UserData userData) throws Exception {
         ResponseWrapper response = new ResponseWrapper();
         EmailAlert emailAlert = new EmailAlert();
         emailAlert =mailService.constructEmailObj(userData);
